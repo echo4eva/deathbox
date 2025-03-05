@@ -1,0 +1,9 @@
+[Unit]
+Description=Send heartbeat to deathbox
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/deathbox
+
+[Install]
+WantedBy=multi-user.target
