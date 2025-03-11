@@ -51,7 +51,7 @@ func main() {
 		for msg := range ch {
 			expiredKey := msg.Payload
 			logger.Info("key expired", "key", expiredKey)
-			sendTweet(c, "test")
+			sendTweet(c, os.Getenv("TWT_MESSAGE"))
 		}
 	}()
 
