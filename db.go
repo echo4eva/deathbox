@@ -6,10 +6,12 @@ import (
 )
 
 func registerHeartbeat(ctx context.Context, device string) {
+	duration := time.Duration(7 * 24 * time.Hour)
+
 	currentTTL, _ := rdb.TTL(ctx, "heartbeat").Result()
-	rdb.Set(ctx, "heartbeat", time.Now(), time.Duration(10000*time.Second))
+	rdb.Set(ctx, "heartbeat", time.Now(), duration)
 	newTTL, _ := rdb.TTL(ctx, "heartbeat").Result()
-	expires := time.Now().Add(10000 * time.Second)
+	expires := time.Now().Add(duration)
 
 	logger.Info(
 		"heartbeat detected",

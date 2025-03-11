@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"github.com/labstack/echo"
+	"github.com/michimani/gotwi"
 	"github.com/redis/go-redis/v9"
 )
 
@@ -30,6 +31,18 @@ func main() {
 
 	logger = slog.New(slog.NewTextHandler(os.Stdout, nil))
 
+	in := &gotwi.NewClientInput{
+		AuthenticationMethod: gotwi.AuthenMethodOAuth1UserContext,
+		OAuthToken:           os.Getenv("TWT_ACCESS_TOKEN"),
+		OAuthTokenSecret:     os.Getenv("TWT_ACCESS_TOKEN_SECRET"),
+	}
+
+	c, err := gotwi.NewClient(in)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
 	go func() {
 		psub := rdb.Subscribe(ctx, "__keyevent@0__:expired")
 		defer psub.Close()
@@ -37,7 +50,8 @@ func main() {
 		ch := psub.Channel()
 		for msg := range ch {
 			expiredKey := msg.Payload
-			fmt.Printf("Key expired: %s\n", expiredKey)
+			logger.Info("key expired", "key", expiredKey)
+			sendTweet(c, "test")
 		}
 	}()
 
