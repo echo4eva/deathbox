@@ -13,4 +13,4 @@ if [ -z "$DEATHBOX_HOST" ] || [ -z "$DEATHBOX_CLIENT_DEVICE" ]; then
 fi
 
 echo "Sending heartbeat to Host"
-curl -X POST -H "Device: $DEATHBOX_CLIENT_DEVICE" $DEATHBOX_HOST/heartbeat
+curl -X POST -H "Device: $DEATHBOX_CLIENT_DEVICE" -H "Secret: $DEATHBOX_SHARED_SECRET" $DEATHBOX_HOST/heartbeat

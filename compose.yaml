@@ -1,5 +1,7 @@
 services:
   server:
+    env_file:
+      - path: ./.env
     build: .
     ports:
       - 8080:8080

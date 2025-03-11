@@ -3,17 +3,19 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/labstack/echo"
 )
 
-func (app *Application) registerHeartbeat(c echo.Context) error {
+func handleHeartbeat(c echo.Context) error {
 	device := c.Request().Header.Get("Device")
-	if device == "" {
-		return echo.NewHTTPError(http.StatusBadRequest, "You suck!")
+	clientSecret := c.Request().Header.Get("Secret")
+	if device == "" || clientSecret != os.Getenv("SECRET") {
+		return echo.NewHTTPError(http.StatusBadRequest)
 	}
 
-	app.DoSomething(c.Request().Context())
+	registerHeartbeat(c.Request().Context(), device)
 
 	return c.String(http.StatusOK, fmt.Sprintf("Hello %s", device))
 }
