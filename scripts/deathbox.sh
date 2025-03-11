@@ -1,14 +1,14 @@
 #!/bin/sh
 
-if [ -f "$HOME/deathbox.conf" ]; then
-    . "$HOME/deathbox.conf"
+if [ -f "$HOME/.deathbox.conf" ]; then
+    . "$HOME/.deathbox.conf"
 else
-    echo "Exiting. Must have a deathbox.conf at $HOME/deathbox.conf"
+    echo "Exiting. Must have a deathbox.conf at $HOME/.deathbox.conf"
     exit 1
 fi
 
-if [ -z "$DEATHBOX_HOST" ] || [ -z "$DEATHBOX_CLIENT_DEVICE" ]; then
-    echo "Exiting. Must enter a host/client device in $HOME/deathbox.conf"
+if [ -z "$DEATHBOX_HOST" ] || [ -z "$DEATHBOX_CLIENT_DEVICE" ] || [ -z "$DEATHBOX_SHARED_SECRET" ]; then
+    echo "Exiting. Must enter a host/client device/shared secret in $HOME/.deathbox.conf"
     exit 1
 fi
 
