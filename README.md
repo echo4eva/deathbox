@@ -6,6 +6,12 @@ By default, sending a tweet is implemented as the action.
 
 ---
 
+## Overview
+
+[I made a Youtube video briefly going over it, link is here!](https://youtu.be/bqxi47tGdRE)
+
+---
+
 ## Service Instructions
 
 Intended for VPS hosting on Linux.
