@@ -6,4 +6,4 @@ Type=oneshot
 ExecStart=%h/.local/bin/deathbox
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target

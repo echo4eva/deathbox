@@ -42,6 +42,7 @@ Important files in this repo's /scripts directory
 ```shell
 mkdir -p ~/.config/systemd/user
 curl https://raw.githubusercontent.com/echo4eva/deathbox/refs/heads/main/scripts/deathbox.service -o ~/.config/systemd/user/deathbox.service
+systemctl --user daemon-reload
 systemctl --user enable deathbox
 ```
 
