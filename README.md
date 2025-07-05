@@ -48,6 +48,7 @@ systemctl --user enable deathbox
 
 2. Setting up `deathbox.sh`
 ```shell
+mkdir -p ~/.local/bin
 curl https://raw.githubusercontent.com/echo4eva/deathbox/refs/heads/main/scripts/deathbox.sh -o ~/.local/bin/deathbox
 chmod +x ~/.local/bin/deathbox
 ```
